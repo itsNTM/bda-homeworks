@@ -1,0 +1,49 @@
+Session 3 : Part 3
+#------ ANSWERS -----
+1. Which lines were retrieved?
+The retrieved lines included sentences mentioning Fantine from her introduction. She is described as one of four young women, in a relationship with Félix Tholomyès, and as having beautiful blonde hair. She is also described as a “good girl” in her early stage of life and still somewhat connected to her working-class background.
+
+2. Did Gemini have enough context?
+Gemini had partial context. It can identify Fantine as a character and give a basic explanation, but the answer may be incomplete if key details are missing from retrieved lines.
+
+3. What would improve this tiny RAG system?
+- Retrieving full paragraphs instead of single lines
+- Increasing context window dynamically based on query complexity
+- Removing noisy or unrelated matches
+
+#------- Improvement -------------
+1. Did Gemini give a more detailed answer?
+Yes, Gemini give a more detailed answer because with more context, it has access to more relevant information from the text.
+
+2. What is the trade-off of sending more context?
+The trade-off of sending more context is between detail and efficiency. More context can improve answer quality, but it also makes the prompt longer, slower, and more expensive. This can lead to add irrelevant or repeated information, which can reduce clarity.
+
+#------- Reflection Task --------
+RAG stands for Retrieval-Augmented Generation. It is a method where relevant pieces of information are retrieved from a dataset and then sends only that information to a language model like Gemini to generate an answer.
+
+The context window is the limited amount of text an LLM can process at one time. We cannot always send a whole book, website, or dataset to an LLM because models have input size limits. Even if it were possible, it would be inefficient and expensive, which can reduce the quality of the answer.
+
+Iterators and yield help us handle large files efficiently by streaming data one piece at a time instead of loading everything at once into memory. This allows to process large datasets gradually and stop early once enough relevant information is found.
+
+One key trade-off is between completeness and noise. If too little context is included, the model could miss important information and give an incomplete answer. However, if too much context is included, the prompt becomes noisy, slower, and more expensive, which can also reduce answer quality.
+
+For example, with 50 lecture transcripts, a simple RAG system can read through each file one by one, select chunks that contain keywords such as “dynamic programming,” and include only those chunks in the prompt. Gemini then uses this selected context to answer the question.
+
+
+
+------ Session 3: Homweork -----
+#------- Reflection --------
+1. Which tasks were best solved with streaming?
+Task such as reading the book line-by-line, creating chunks, and sending each chunk to Gemini were best solved with streaming.
+
+2. Which tasks required loading all data?
+None of the task required loading all data because it is processed in small chunks using a generator.
+
+3. Why is a generator with yield still an iterator?
+A generator with yield is still an iterator because it returns values one at a time and remembers its position between calls.
+
+4. When does yield save memory compared with readlines()?
+When processing large files yield save memory compared with readlines, because it only stores one chunk at a time instead of the whole file.
+
+5. Why is sending the whole book to Gemini in one prompt a bad idea?
+The idea of sending the whole book to Gemini in one prompt is a bad idea because it exceeds token limits, reduces accuracy, increases cost, and makes results harder to control.
